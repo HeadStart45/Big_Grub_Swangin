@@ -17,10 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Coroutine delayReleaseCoro;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     private void Update()
@@ -35,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
             else if (isTouchingVine)
             {
                 TouchedVine.Link(rb);
+                rb.AddForce(rb.velocity * 10.0f);
             }
             
         }
@@ -47,31 +45,38 @@ public class PlayerMovement : MonoBehaviour
                 isTouchingVine = false;
                 TouchedVine = null;
 
-                rb.AddForce((rb.velocity.normalized * 3.0f), ForceMode.Force);
+                rb.AddForce(new Vector3(0.5f, 0.5f, 0) * 4, ForceMode.Impulse);
 
             }
         }
 
+        
+
+    }
+
+    private void FixedUpdate()
+    {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 3.0f))
+        if (Physics.Raycast(transform.position, rb.velocity.normalized, out hit, 4.0f))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            if (hit.transform.gameObject.CompareTag("Vine"))
+            {
+                if (delayReleaseCoro != null)
+                {
+                    StopCoroutine(delayReleaseCoro);
+                }
+                isTouchingVine = true;
+                TouchedVine = hit.transform.gameObject.GetComponent<Vine>();
+            }
+            Debug.DrawRay(transform.position, rb.velocity.normalized * hit.distance, Color.green);
             Debug.Log("HitVine");
         }
-
+        //Debug.DrawRay(transform.position, rb.velocity.normalized, Color.yellow);
     }
 
     private void OnCollisionEnter(Collision _collision)
     {
-        if (_collision.gameObject.CompareTag("Vine"))
-        {
-            if (delayReleaseCoro != null)
-            {
-                StopCoroutine(delayReleaseCoro);
-            }
-            isTouchingVine = true;
-            TouchedVine = _collision.gameObject.GetComponent<Vine>();
-        }
+        
     }
 
     private void OnCollisionExit(Collision _collision)
