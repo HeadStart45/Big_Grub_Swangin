@@ -38,7 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+<<<<<<< Updated upstream
   m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414754, b: 0.12107867, a: 1}
+=======
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+>>>>>>> Stashed changes
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +127,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!1 &64862183
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +686,9 @@ Transform:
   m_PrefabInstance: {fileID: 5175875928434430917}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1239294426
+=======
+--- !u!1 &1904984165
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -865,6 +873,7 @@ Transform:
   - {fileID: 64862185}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+<<<<<<< Updated upstream
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1468031219
 MonoBehaviour:
@@ -1248,3 +1257,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e6dcf5bac7f4cb42b3884c54661be76, type: 3}
+=======
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+>>>>>>> Stashed changes
