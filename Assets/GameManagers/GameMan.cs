@@ -9,6 +9,9 @@ namespace GameManagers
 {
     public class GameMan : MonoBehaviour
     {
+        private static string hUrl = "http://dreamlo.com/lb/-3VGZRffn0GynG_bvLq3NgUNbGP26PDE6_pivNC-b6iA";
+        private static string pCode = "-3VGZRffn0GynG_bvLq3NgUNbGP26PDE6_pivNC-b6iA";
+        private static string pubCode = "63ddd8ab8f40bb08f4c33072";
         public int score;
         [SerializeField]
         private TMP_Text scoreText;
@@ -20,6 +23,8 @@ namespace GameManagers
         private GameObject DeathScreen;
         [SerializeField]
         private GameObject InGameUI;
+        [SerializeField]
+        private GameObject HighscoreSystem;
 
         public Vector3 Playerstart;
         
@@ -31,7 +36,11 @@ namespace GameManagers
             {
                 Instance = this;
             }
-            Object.DontDestroyOnLoad(this);
+            else
+            {
+                Destroy(this);
+            }
+
         }
 
         public void IncrementScore(float _distanceTravelled)
@@ -50,7 +59,7 @@ namespace GameManagers
         {
             DeathScreen.SetActive(true);
             InGameUI.SetActive(false);
-            deathScoreText.text = score.ToString() + "m";
+            Instantiate(HighscoreSystem);
         }
 
         public void Restart()
