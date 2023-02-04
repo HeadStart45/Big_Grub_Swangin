@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float JumpPower;
     [SerializeField] private float ReleaseVinePower;
+    [SerializeField] private float FartPower;
+    [SerializeField] private float MushroomPower;
     [SerializeField] private float GrabSafeZone;
     [SerializeField] private Vector3 JumpDirection;
 
@@ -32,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         initialX = transform.position.x;
-        GameMan.Instance.Playerstart = transform.position;
+        
     }
 
     // Update is called once per frame
@@ -69,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        /*
         if (GrabbedVine == null)
         {
             RaycastHit hit;
@@ -80,11 +83,9 @@ public class PlayerMovement : MonoBehaviour
                     TouchedVine = hit.transform.GetComponent<Vine>();
                     //Debug.DrawRay(transform.position, rb.velocity.normalized * hit.distance, Color.green)
                 }
-
-                ;
-                
             }
         }
+        */
         //Debug.DrawRay(transform.position, rb.velocity.normalized, Color.yellow);
     }
 
@@ -127,11 +128,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (FirstJump)
+        if (FirstJump )
         {
-            GameMan.Instance.PlayerHasDied();
-            Destroy(this.gameObject);
+            if (collision.gameObject.CompareTag("Mushroom"))
+            {
+                Debug.Log("Mushroom Blast");
+                rb.AddForce(JumpDirection * MushroomPower, ForceMode.Impulse);
+            }
+            else
+            {
+                GameMan.Instance.PlayerHasDied();
+                Destroy(this.gameObject);
+            }
+            
         }
+        
     }
 
     IEnumerator DelayReTouch(Vine _vine)

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Vine
   - Ground
+  - Mushroom
   layers:
   - Default
   - TransparentFX

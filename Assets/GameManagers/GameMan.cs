@@ -9,9 +9,9 @@ namespace GameManagers
 {
     public class GameMan : MonoBehaviour
     {
-        private static string hUrl = "http://dreamlo.com/lb/-3VGZRffn0GynG_bvLq3NgUNbGP26PDE6_pivNC-b6iA";
-        private static string pCode = "-3VGZRffn0GynG_bvLq3NgUNbGP26PDE6_pivNC-b6iA";
-        private static string pubCode = "63ddd8ab8f40bb08f4c33072";
+        //private static string hUrl = "http://dreamlo.com/lb/-3VGZRffn0GynG_bvLq3NgUNbGP26PDE6_pivNC-b6iA";
+        //private static string pCode = "-3VGZRffn0GynG_bvLq3NgUNbGP26PDE6_pivNC-b6iA";
+        //private static string pubCode = "63ddd8ab8f40bb08f4c33072";
         public int score;
         [SerializeField]
         private TMP_Text scoreText;
@@ -26,7 +26,7 @@ namespace GameManagers
         [SerializeField]
         private GameObject HighscoreSystem;
 
-        public Vector3 Playerstart;
+        
         
         // Start is called before the first frame update
         void Start()
