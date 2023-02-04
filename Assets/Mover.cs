@@ -21,9 +21,4 @@ public class Mover : MonoBehaviour
                 transform.position.z + (3.0f * Time.deltaTime));
         };
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Collide");
-    }
 }

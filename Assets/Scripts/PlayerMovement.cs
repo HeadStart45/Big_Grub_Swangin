@@ -1,36 +1,42 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using GameManagers;
 using UnityEngine;
-
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float JumpPower;
     [SerializeField] private float ReleaseVinePower;
+    [SerializeField] private float FartPower;
+    [SerializeField] private float MushroomPower;
     [SerializeField] private float GrabSafeZone;
     [SerializeField] private Vector3 JumpDirection;
-    
+
+    private float initialX;
+
     //Components
     [SerializeField] private Rigidbody rb;
 
     private bool FirstJump = false;
-    
+
     [SerializeField]
     private Vine TouchedVine;
     [SerializeField]
     private Vine GrabbedVine;
 
     private FixedJoint tempJoint;
-    
+
     private Coroutine delayReleaseCoro;
     // Start is called before the first frame update
-
+    private void Start()
+    {
+        initialX = transform.position.x;
+        
+    }
 
     // Update is called once per frame
     private void Update()
     {
+        // GameMan.Instance.IncrementScore(-(transform.position.x - initialX));
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!FirstJump)
@@ -51,16 +57,25 @@ public class PlayerMovement : MonoBehaviour
             {
                 ReleaseVine();
             }
-            
+
 
         }
 
-        
+        if (GameMan.Instance.Testing)
+        {
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.position += new Vector3(-0.1f, 0f, 0f);
+            }
+        }
+
+
 
     }
 
     private void FixedUpdate()
     {
+        /*
         if (GrabbedVine == null)
         {
             RaycastHit hit;
@@ -72,11 +87,9 @@ public class PlayerMovement : MonoBehaviour
                     TouchedVine = hit.transform.GetComponent<Vine>();
                     //Debug.DrawRay(transform.position, rb.velocity.normalized * hit.distance, Color.green)
                 }
-
-                ;
-                
             }
         }
+        */
         //Debug.DrawRay(transform.position, rb.velocity.normalized, Color.yellow);
     }
 
@@ -98,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.AddForce(JumpDirection * ReleaseVinePower, ForceMode.Impulse);
     }
-    
+
     private void OnTriggerExit(Collider _collision)
     {
         if (_collision.gameObject == TouchedVine)
@@ -117,6 +130,28 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (FirstJump )
+        {
+            if (collision.gameObject.CompareTag("Mushroom"))
+            {
+                Debug.Log("Mushroom Blast");
+                rb.AddForce(JumpDirection * MushroomPower, ForceMode.Impulse);
+            }
+            else
+            {
+                if (!GameMan.Instance.Testing)
+                {
+                    GameMan.Instance.PlayerHasDied();
+                    Destroy(this.gameObject);
+                }
+
+            }
+            
+        }
+        
+    }
 
     IEnumerator DelayReTouch(Vine _vine)
     {
@@ -125,5 +160,5 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         coll.enabled = true;
     }
-    
+
 }
