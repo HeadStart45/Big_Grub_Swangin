@@ -8,6 +8,9 @@ namespace GameManagers {
         // Prefab for the new chunk to add
         [SerializeField]
         private GameObject chunkPrefab;
+        //Initial Chunk 
+        [SerializeField]
+        private GameObject firstChunk;
 
         /// <summary>
         /// On Chunk Manager awake, create a singleton instance.
@@ -23,7 +26,7 @@ namespace GameManagers {
         }
 
         private void CreateChunk(float xPos) {
-            Instantiate(chunkPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+            Instantiate(chunkPrefab, new Vector3(xPos, firstChunk.transform.position.y, firstChunk.transform.position.z), Quaternion.identity);
         }
 
         /// <summary>
@@ -31,10 +34,12 @@ namespace GameManagers {
         /// </summary>
         public void Start() {
             // Create the first chunk at 0
-            CreateChunk(0);
+            //CreateChunk(0);
 
             // Create the next map chunk at the end of the previous chunk
-            CreateChunk(GetBounds(chunkPrefab).x - 1);
+            CreateChunk( firstChunk.transform.position.x - (GetBounds(chunkPrefab).x - 1));
+            
+            
         }
 
         /// <summary>

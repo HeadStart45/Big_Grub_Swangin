@@ -17,12 +17,13 @@ public class PlayerMovement : MonoBehaviour
 
     private bool FirstJump = false;
     
-    private bool isTouchingVine;
+    [SerializeField]
     private Vine TouchedVine;
-
+    [SerializeField]
     private Vine GrabbedVine;
-    
 
+    private FixedJoint tempJoint;
+    
     private Coroutine delayReleaseCoro;
     // Start is called before the first frame update
 
@@ -34,22 +35,24 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!FirstJump)
             {
+                Debug.Log("Jump");
                 rb.AddForce(JumpDirection * JumpPower, ForceMode.Impulse);
                 FirstJump = true;
             }
-            else if (isTouchingVine)
+            else if (TouchedVine != null)
             {
                 GrabVine();
             }
-            
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            if (isTouchingVine)
+            if (GrabbedVine != null)
             {
                 ReleaseVine();
             }
+            
+
         }
 
         
@@ -58,57 +61,69 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, rb.velocity.normalized, out hit, GrabSafeZone))
+        if (GrabbedVine == null)
         {
-            if (hit.transform.gameObject.CompareTag("Vine"))
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, rb.velocity.normalized, out hit, GrabSafeZone))
             {
-                if (delayReleaseCoro != null)
+                if (hit.transform.gameObject.CompareTag("Vine") && GrabbedVine == null)
                 {
-                    StopCoroutine(delayReleaseCoro);
+                    Debug.Log("HitVine");
+                    TouchedVine = hit.transform.GetComponent<Vine>();
+                    //Debug.DrawRay(transform.position, rb.velocity.normalized * hit.distance, Color.green)
                 }
-                isTouchingVine = true;
-                TouchedVine = hit.transform.gameObject.GetComponent<Vine>();
+
+                ;
+                
             }
-            Debug.DrawRay(transform.position, rb.velocity.normalized * hit.distance, Color.green);
-            Debug.Log("HitVine");
         }
         //Debug.DrawRay(transform.position, rb.velocity.normalized, Color.yellow);
     }
 
     private void GrabVine()
     {
-        TouchedVine.Link(rb);
+        tempJoint = gameObject.AddComponent<FixedJoint>();
+        tempJoint.connectedBody = TouchedVine.GetComponent<Rigidbody>();
         GrabbedVine = TouchedVine;
-        TouchedVine = null;
-        isTouchingVine = false;
+
         //rb.AddForce(rb.velocity * ReleaseVinePower, ForceMode.Impulse);
     }
 
     private void ReleaseVine()
     {
-        GrabbedVine.DeLink();
-        isTouchingVine = false;
+        Destroy(tempJoint);
+        Destroy(GrabbedVine.gameObject.GetComponent<BoxCollider>());
+        GrabbedVine = null;
         TouchedVine = null;
 
         rb.AddForce(JumpDirection * ReleaseVinePower, ForceMode.Impulse);
     }
     
-    private void OnCollisionExit(Collision _collision)
+    private void OnTriggerExit(Collider _collision)
     {
         if (_collision.gameObject == TouchedVine)
         {
             Debug.Log("EndContact");
-            delayReleaseCoro = StartCoroutine(DelayReleaseVine());
-            
+
+                TouchedVine = null;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Vine"))
+        {
+            TouchedVine = other.gameObject.GetComponent<Vine>();
         }
     }
 
 
-    IEnumerator DelayReleaseVine()
+    IEnumerator DelayReTouch(Vine _vine)
     {
-        yield return new WaitForSeconds(0.1f);
-        isTouchingVine = false;
-        TouchedVine = null;
+        BoxCollider coll = _vine.GetComponent<BoxCollider>();
+        coll.enabled = false;
+        yield return new WaitForSeconds(1.0f);
+        coll.enabled = true;
     }
+    
 }

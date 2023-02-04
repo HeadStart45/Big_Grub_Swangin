@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5175875928365901495}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,4 +128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpPower: 15
+  ReleaseVinePower: 5
+  GrabSafeZone: 3
+  JumpDirection: {x: -0.5, y: 0.5, z: 0}
   rb: {fileID: 5175875928365901492}
+  TouchedVine: {fileID: 0}
+  GrabbedVine: {fileID: 0}
