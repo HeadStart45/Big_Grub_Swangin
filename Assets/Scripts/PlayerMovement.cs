@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameManagers;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float ReleaseVinePower;
     [SerializeField] private float GrabSafeZone;
     [SerializeField] private Vector3 JumpDirection;
+
+    private float initialX;
     
     //Components
     [SerializeField] private Rigidbody rb;
@@ -26,11 +29,16 @@ public class PlayerMovement : MonoBehaviour
     
     private Coroutine delayReleaseCoro;
     // Start is called before the first frame update
-
+    private void Start()
+    {
+        initialX = transform.position.x;
+        GameMan.Instance.Playerstart = transform.position;
+    }
 
     // Update is called once per frame
     private void Update()
     {
+        GameManagers.GameMan.Instance.IncrementScore(-(transform.position.x - initialX));
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!FirstJump)
@@ -85,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
         tempJoint = gameObject.AddComponent<FixedJoint>();
         tempJoint.connectedBody = TouchedVine.GetComponent<Rigidbody>();
         GrabbedVine = TouchedVine;
-
+        
         //rb.AddForce(rb.velocity * ReleaseVinePower, ForceMode.Impulse);
     }
 
@@ -117,6 +125,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (FirstJump)
+        {
+            GameMan.Instance.PlayerHasDied();
+            Destroy(this.gameObject);
+        }
+    }
 
     IEnumerator DelayReTouch(Vine _vine)
     {
