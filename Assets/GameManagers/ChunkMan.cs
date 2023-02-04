@@ -1,3 +1,4 @@
+using System.IO.IsolatedStorage;
 using UnityEngine;
 
 namespace GameManagers {
@@ -8,6 +9,10 @@ namespace GameManagers {
         // Prefab for the new chunk to add
         [SerializeField]
         private GameObject chunkPrefab;
+
+        // Number of chunks to render, defaults to 5
+        [SerializeField]
+        private float chunkCount = 5;
 
         /// <summary>
         /// On Chunk Manager awake, create a singleton instance.
@@ -27,14 +32,12 @@ namespace GameManagers {
         }
 
         /// <summary>
-        /// On start create 2 chunks
+        /// On start create chunks
         /// </summary>
         public void Start() {
-            // Create the first chunk at 0
-            CreateChunk(0);
-
-            // Create the next map chunk at the end of the previous chunk
-            CreateChunk(GetBounds(chunkPrefab).x - 1);
+            for (var i = 0; i < chunkCount; i++) {
+                CreateChunk((GetBounds(chunkPrefab).x - 1) * i);
+            }
         }
 
         /// <summary>
