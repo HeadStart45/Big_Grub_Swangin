@@ -213,3 +213,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/unity,jetbrains,windows
+
+# Android build
+swangin_BackUpThisFolder_ButDontShipItWithYourGame
