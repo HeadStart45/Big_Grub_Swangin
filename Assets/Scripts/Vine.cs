@@ -5,6 +5,6 @@ using UnityEngine;
 
 public class Vine : MonoBehaviour
 {
-
+    public BoxCollider _GraceZone;
 
 }
