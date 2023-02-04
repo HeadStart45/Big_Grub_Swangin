@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!FirstJump)
             {
-                Debug.Log("Jump");
+                // Debug.Log("Jump");
                 rb.AddForce(JumpDirection * JumpPower, ForceMode.Impulse);
                 FirstJump = true;
             }
@@ -69,6 +69,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // TODO: Remove test data
+        if (Input.GetKey(KeyCode.D)) {
+            transform.position += new Vector3(-0.2f, 0, 0);
+        }
+        if (Input.GetKey(KeyCode.A)) {
+            transform.position += new Vector3(0.2f, 0, 0);
+        }
+
+
         if (GrabbedVine == null)
         {
             RaycastHit hit;
@@ -76,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (hit.transform.gameObject.CompareTag("Vine") && GrabbedVine == null)
                 {
-                    Debug.Log("HitVine");
+                    // Debug.Log("HitVine");
                     TouchedVine = hit.transform.GetComponent<Vine>();
                     //Debug.DrawRay(transform.position, rb.velocity.normalized * hit.distance, Color.green)
                 }
@@ -111,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_collision.gameObject == TouchedVine)
         {
-            Debug.Log("EndContact");
+            // Debug.Log("EndContact");
 
                 TouchedVine = null;
         }
