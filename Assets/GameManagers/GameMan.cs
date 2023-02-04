@@ -15,8 +15,7 @@ namespace GameManagers
         public int score;
         [SerializeField]
         private TMP_Text scoreText;
-        [SerializeField] 
-        private TMP_Text deathScoreText;
+
         
         public static GameMan Instance;
         [SerializeField]
@@ -26,7 +25,9 @@ namespace GameManagers
         [SerializeField]
         private GameObject HighscoreSystem;
 
-        
+        [Header("TEST MODE")]
+        [SerializeField]
+        public bool Testing;
         
         // Start is called before the first frame update
         void Start()
@@ -41,31 +42,44 @@ namespace GameManagers
                 Destroy(this);
             }
 
+            if (Testing)
+            {
+                scoreText.text = "TESTING";
+            }
+
         }
 
         public void IncrementScore(float _distanceTravelled)
         {
-            if (score < _distanceTravelled)
+            if (!Testing)
             {
-                score = (int)_distanceTravelled;
+                if (score < _distanceTravelled)
+                {
+                    score = (int)_distanceTravelled;
+                }
+                scoreText.text = score.ToString() + "m";
             }
+
             
-            
-            
-            scoreText.text = score.ToString() + "m";
         }
 
         public void PlayerHasDied()
         {
-            DeathScreen.SetActive(true);
-            InGameUI.SetActive(false);
-            Instantiate(HighscoreSystem);
+            if (!Testing)
+            {
+                DeathScreen.SetActive(true);
+                InGameUI.SetActive(false);
+                Instantiate(HighscoreSystem);
+            }
         }
 
         public void Restart()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            score = 0;
+            if (!Testing)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                score = 0;
+            }
         }
     }
 }

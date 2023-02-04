@@ -65,6 +65,14 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+        if (GameMan.Instance.Testing)
+        {
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                transform.position += new Vector3(-0.1f, 0f, 0f);
+            }
+        }
+
         
 
     }
@@ -137,8 +145,12 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                GameMan.Instance.PlayerHasDied();
-                Destroy(this.gameObject);
+                if (!GameMan.Instance.Testing)
+                {
+                    GameMan.Instance.PlayerHasDied();
+                    Destroy(this.gameObject);
+                }
+                
             }
             
         }
