@@ -36,8 +36,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+    var touch = Input.GetTouch(0);
+
         // GameMan.Instance.IncrementScore(-(transform.position.x - initialX));
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || touch.phase == TouchPhase.Began)
         {
             if (!FirstJump)
             {
@@ -51,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) || touch.phase == TouchPhase.Ended)
         {
             if (GrabbedVine != null)
             {
