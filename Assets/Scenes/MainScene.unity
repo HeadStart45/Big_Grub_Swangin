@@ -596,6 +596,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartChunk
       objectReference: {fileID: 0}
+    - target: {fileID: 3656463937394826856, guid: fc88c678bd03caa4b8f42097106614d5, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc88c678bd03caa4b8f42097106614d5, type: 3}
 --- !u!1001 &965688117
@@ -1168,7 +1172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkPrefab: {fileID: 3656463937394826856, guid: fc88c678bd03caa4b8f42097106614d5, type: 3}
   firstChunk: {fileID: 1425683327}
-  chunks: []
 --- !u!4 &2027402503
 Transform:
   m_ObjectHideFlags: 0
