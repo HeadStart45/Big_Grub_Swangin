@@ -22,9 +22,9 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Water
   m_Shader: {fileID: -6465566751694194690, guid: 81b268d88fb50414ca309270067d5bb5, type: 3}
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _BUILTIN_SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -37,7 +37,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.8
+    - _Alpha: 0.69
     - _BUILTIN_AlphaClip: 0
     - _BUILTIN_Blend: 0
     - _BUILTIN_CullMode: 2
@@ -49,11 +49,11 @@ Material:
     - _BUILTIN_ZTest: 4
     - _BUILTIN_ZWrite: 0
     - _BUILTIN_ZWriteControl: 0
-    - _Displacement: 1.5
-    - _RippleDensity: 5
+    - _Displacement: 1.35
+    - _RippleDensity: 7.32
     - _RippleSpeed: 4
-    - _Slimness: 3
-    - _WaveSpeed: 0.5
+    - _Slimness: 9.09
+    - _WaveSpeed: 0.25
     m_Colors:
     - _BaseColour: {r: 0.23371306, g: 0.49056602, b: 0.3858368, a: 0}
     - _RippleColour: {r: 0.2782744, g: 0.9999011, b: 0.56659603, a: 0}
