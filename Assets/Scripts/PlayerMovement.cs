@@ -1,10 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using GameManagers;
-using Unity.VisualScripting;
 using UnityEngine;
-
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,19 +12,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 JumpDirection;
 
     private float initialX;
-    
+
     //Components
     [SerializeField] private Rigidbody rb;
 
     private bool FirstJump = false;
-    
+
     [SerializeField]
     private Vine TouchedVine;
     [SerializeField]
     private Vine GrabbedVine;
 
     private FixedJoint tempJoint;
-    
+
     private Coroutine delayReleaseCoro;
     // Start is called before the first frame update
     private void Start()
@@ -40,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        GameManagers.GameMan.Instance.IncrementScore(-(transform.position.x - initialX));
+        // GameMan.Instance.IncrementScore(-(transform.position.x - initialX));
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!FirstJump)
@@ -61,19 +57,19 @@ public class PlayerMovement : MonoBehaviour
             {
                 ReleaseVine();
             }
-            
+
 
         }
 
         if (GameMan.Instance.Testing)
         {
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKey(KeyCode.D))
             {
                 transform.position += new Vector3(-0.1f, 0f, 0f);
             }
         }
 
-        
+
 
     }
 
@@ -102,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         tempJoint = gameObject.AddComponent<FixedJoint>();
         tempJoint.connectedBody = TouchedVine.GetComponent<Rigidbody>();
         GrabbedVine = TouchedVine;
-        
+
         //rb.AddForce(rb.velocity * ReleaseVinePower, ForceMode.Impulse);
     }
 
@@ -115,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.AddForce(JumpDirection * ReleaseVinePower, ForceMode.Impulse);
     }
-    
+
     private void OnTriggerExit(Collider _collision)
     {
         if (_collision.gameObject == TouchedVine)
@@ -150,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
                     GameMan.Instance.PlayerHasDied();
                     Destroy(this.gameObject);
                 }
-                
+
             }
             
         }
@@ -164,5 +160,5 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         coll.enabled = true;
     }
-    
+
 }
