@@ -1,15 +1,10 @@
-<<<<<<< HEAD
-
-=======
 using System.Collections;
->>>>>>> c8f0e1a52b3173b4895be2a041a04a10a72779bc
 using GameManagers;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [FormerlySerializedAs("JumpPower")] [SerializeField] private float jumpPower;
+    [SerializeField] private float JumpPower;
     [SerializeField] private float ReleaseVinePower;
     [SerializeField] private float FartPower;
     [SerializeField] private float MushroomPower;
@@ -47,10 +42,10 @@ public class PlayerMovement : MonoBehaviour
             if (!FirstJump)
             {
                 Debug.Log("Jump");
-                rb.AddForce(JumpDirection * jumpPower, ForceMode.Impulse);
+                rb.AddForce(JumpDirection * JumpPower, ForceMode.Impulse);
                 FirstJump = true;
             }
-            else if (TouchedVine != null && CheckIfPlayerIsInVine(TouchedVine))
+            else if (TouchedVine != null)
             {
                 GrabVine();
             }
@@ -74,22 +69,28 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-<<<<<<< HEAD
-        if (Input.GetKey(KeyCode.LeftAlt))
-        {
-            Fart();
-        }
-        
-=======
 
->>>>>>> c8f0e1a52b3173b4895be2a041a04a10a72779bc
 
     }
 
-    private void Fart()
+    private void FixedUpdate()
     {
-        
-        rb.AddForce(JumpDirection * FartPower, ForceMode.Force);
+        /*
+        if (GrabbedVine == null)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, rb.velocity.normalized, out hit, GrabSafeZone))
+            {
+                if (hit.transform.gameObject.CompareTag("Vine") && GrabbedVine == null)
+                {
+                    Debug.Log("HitVine");
+                    TouchedVine = hit.transform.GetComponent<Vine>();
+                    //Debug.DrawRay(transform.position, rb.velocity.normalized * hit.distance, Color.green)
+                }
+            }
+        }
+        */
+        //Debug.DrawRay(transform.position, rb.velocity.normalized, Color.yellow);
     }
 
     private void GrabVine()
@@ -97,13 +98,8 @@ public class PlayerMovement : MonoBehaviour
         tempJoint = gameObject.AddComponent<FixedJoint>();
         tempJoint.connectedBody = TouchedVine.GetComponent<Rigidbody>();
         GrabbedVine = TouchedVine;
-<<<<<<< HEAD
-        
-        rb.AddForce(JumpDirection * 10, ForceMode.VelocityChange);
-=======
 
         //rb.AddForce(rb.velocity * ReleaseVinePower, ForceMode.Impulse);
->>>>>>> c8f0e1a52b3173b4895be2a041a04a10a72779bc
     }
 
     private void ReleaseVine()
@@ -138,12 +134,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (FirstJump )
         {
-            if (!GameMan.Instance.Testing)
+            if (collision.gameObject.CompareTag("Mushroom"))
             {
-<<<<<<< HEAD
-                GameMan.Instance.PlayerHasDied();
-                Destroy(this.gameObject);
-=======
                 Debug.Log("Mushroom Blast");
                 rb.AddForce(JumpDirection * MushroomPower, ForceMode.Impulse);
             }
@@ -155,23 +147,18 @@ public class PlayerMovement : MonoBehaviour
                     Destroy(this.gameObject);
                 }
 
->>>>>>> c8f0e1a52b3173b4895be2a041a04a10a72779bc
             }
-        }
-        if (collision.gameObject.CompareTag("Mushroom"))
-        {
-            FirstJump = true;
             
-            Debug.Log("Mushroom Blast");
-            rb.AddForce(JumpDirection * MushroomPower, ForceMode.Impulse);
         }
         
     }
 
-
-    private bool CheckIfPlayerIsInVine(Vine _vine)
+    IEnumerator DelayReTouch(Vine _vine)
     {
-        return _vine._GraceZone.bounds.Contains(transform.position);
+        BoxCollider coll = _vine.GetComponent<BoxCollider>();
+        coll.enabled = false;
+        yield return new WaitForSeconds(1.0f);
+        coll.enabled = true;
     }
 
 }
