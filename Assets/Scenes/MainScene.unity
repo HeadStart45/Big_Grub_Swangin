@@ -696,6 +696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkPrefab: {fileID: 3656463937394826856, guid: fc88c678bd03caa4b8f42097106614d5, type: 3}
   firstChunk: {fileID: 1425683327}
+  chunks: []
 --- !u!4 &2027402503
 Transform:
   m_ObjectHideFlags: 0
@@ -765,6 +766,10 @@ PrefabInstance:
     - target: {fileID: 5175875928365901493, guid: 0e6dcf5bac7f4cb42b3884c54661be76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175875928365901495, guid: 0e6dcf5bac7f4cb42b3884c54661be76, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e6dcf5bac7f4cb42b3884c54661be76, type: 3}
