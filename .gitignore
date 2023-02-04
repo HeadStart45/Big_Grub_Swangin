@@ -216,3 +216,6 @@ $RECYCLE.BIN/
 
 # Android build
 swangin_BackUpThisFolder_ButDontShipItWithYourGame
+
+# ios build
+ios
