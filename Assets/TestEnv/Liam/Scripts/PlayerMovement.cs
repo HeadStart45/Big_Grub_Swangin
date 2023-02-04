@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float JumpPower;
     [SerializeField] private float ReleaseVinePower;
     [SerializeField] private float GrabSafeZone;
-    
+    [SerializeField] private Vector3 JumpDirection;
     
     //Components
     [SerializeField] private Rigidbody rb;
@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     
     private bool isTouchingVine;
     private Vine TouchedVine;
+
+    private Vine GrabbedVine;
+    
 
     private Coroutine delayReleaseCoro;
     // Start is called before the first frame update
@@ -31,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!FirstJump)
             {
-                rb.AddForce(new Vector3(0.5f, 0.5f, 0) * JumpPower, ForceMode.Impulse);
+                rb.AddForce(JumpDirection * JumpPower, ForceMode.Impulse);
                 FirstJump = true;
             }
             else if (isTouchingVine)
@@ -45,12 +48,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isTouchingVine)
             {
-                TouchedVine.DeLink();
-                isTouchingVine = false;
-                TouchedVine = null;
-
-                rb.AddForce(new Vector3(0.5f, 0.5f, 0) * 4, ForceMode.Impulse);
-
+                ReleaseVine();
             }
         }
 
@@ -61,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, rb.velocity.normalized, out hit, 4.0f))
+        if (Physics.Raycast(transform.position, rb.velocity.normalized, out hit, GrabSafeZone))
         {
             if (hit.transform.gameObject.CompareTag("Vine"))
             {
@@ -81,19 +79,21 @@ public class PlayerMovement : MonoBehaviour
     private void GrabVine()
     {
         TouchedVine.Link(rb);
-        rb.AddForce(rb.velocity * 10.0f, ForceMode.Impulse);
+        GrabbedVine = TouchedVine;
+        TouchedVine = null;
+        isTouchingVine = false;
+        //rb.AddForce(rb.velocity * ReleaseVinePower, ForceMode.Impulse);
     }
 
     private void ReleaseVine()
     {
-        
+        GrabbedVine.DeLink();
+        isTouchingVine = false;
+        TouchedVine = null;
+
+        rb.AddForce(JumpDirection * ReleaseVinePower, ForceMode.Impulse);
     }
     
-    private void OnCollisionEnter(Collision _collision)
-    {
-        
-    }
-
     private void OnCollisionExit(Collision _collision)
     {
         if (_collision.gameObject == TouchedVine)
