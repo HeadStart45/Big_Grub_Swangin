@@ -8,6 +8,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float JumpPower;
+    [SerializeField] private float ReleaseVinePower;
+    [SerializeField] private float GrabSafeZone;
+    
+    
+    //Components
     [SerializeField] private Rigidbody rb;
 
     private bool FirstJump = false;
@@ -31,8 +36,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (isTouchingVine)
             {
-                TouchedVine.Link(rb);
-                rb.AddForce(rb.velocity * 10.0f);
+                GrabVine();
             }
             
         }
@@ -74,6 +78,17 @@ public class PlayerMovement : MonoBehaviour
         //Debug.DrawRay(transform.position, rb.velocity.normalized, Color.yellow);
     }
 
+    private void GrabVine()
+    {
+        TouchedVine.Link(rb);
+        rb.AddForce(rb.velocity * 10.0f, ForceMode.Impulse);
+    }
+
+    private void ReleaseVine()
+    {
+        
+    }
+    
     private void OnCollisionEnter(Collision _collision)
     {
         
