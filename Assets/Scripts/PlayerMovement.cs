@@ -36,10 +36,39 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-    var touch = Input.GetTouch(0);
+        // Mobile device, so get touch controls
+        if (Application.isMobilePlatform) {
+            var touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                if (!FirstJump)
+                {
+                    Debug.Log("Jump");
+                    rb.AddForce(JumpDirection * JumpPower, ForceMode.Impulse);
+                    FirstJump = true;
+                }
+                else if (TouchedVine != null)
+                {
+                    GrabVine();
+                }
+            }
+
+            if (touch.phase != TouchPhase.Ended) {
+                return;
+            }
+
+            if (GrabbedVine != null) {
+                ReleaseVine();
+            }
+
+            // Early return to not test for keyboard input
+            return;
+        }
 
         // GameMan.Instance.IncrementScore(-(transform.position.x - initialX));
-        if (Input.GetKeyDown(KeyCode.Space) || touch.phase == TouchPhase.Began)
+
+        // Keyboard input
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!FirstJump)
             {
@@ -53,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) || touch.phase == TouchPhase.Ended)
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             if (GrabbedVine != null)
             {
