@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace GameManagers {
     public class ChunkMan : MonoBehaviour {
@@ -8,9 +9,13 @@ namespace GameManagers {
         public static ChunkMan Instance { get; private set; }
 
         // Prefab for the new chunk to add
-        [SerializeField]
+        //[SerializeField]
         private GameObject chunkPrefab;
-
+        
+        //List of possible chunk prefabs, to be selected randomly
+        [SerializeField] 
+        private List<GameObject> chunkPrefabs = new List<GameObject>();
+        
         //Initial Chunk
         [SerializeField]
         private GameObject firstChunk;
@@ -40,6 +45,10 @@ namespace GameManagers {
 
         private GameObject CreateChunk(float xPos) {
 
+            //Randomly Select Prefab to Use
+            var randIndex = Random.Range(0, chunkPrefabs.Count);
+            chunkPrefab = chunkPrefabs[randIndex];
+            
             // Create a new chunk at the end of the previous chunk
             var newChunk = Instantiate(chunkPrefab,
                 new Vector3(xPos - (GetBounds(chunkPrefab).x - 1), _initialChunkPosition.y, _initialChunkPosition.z),
