@@ -50,9 +50,9 @@ Material:
     - _BUILTIN_ZWrite: 0
     - _BUILTIN_ZWriteControl: 0
     - _Displacement: 0
-    - _RippleDensity: 2
+    - _RippleDensity: 17.09
     - _RippleSpeed: 2
-    - _Slimness: 3
+    - _Slimness: 6.51
     - _WaveSpeed: 0
     m_Colors:
     - _BaseColour: {r: 0.23371306, g: 0.49056602, b: 0.3858368, a: 0}
