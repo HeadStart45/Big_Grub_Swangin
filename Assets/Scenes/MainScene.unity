@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414754, b: 0.12107867, a: 1}
+  m_IndirectSpecularColor: {r: 0.12670855, g: 0.13326581, b: 0.11984316, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -765,6 +765,63 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4994720095874803303, guid: 76af375024c4bc14f93d13d1c43d4474, type: 3}
   m_PrefabInstance: {fileID: 1494994575}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &782857746
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 364002459690132344, guid: cef3592934241e247bf1163ba9616657, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 364002459690132344, guid: cef3592934241e247bf1163ba9616657, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.4513283
+      objectReference: {fileID: 0}
+    - target: {fileID: 364002459690132344, guid: cef3592934241e247bf1163ba9616657, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.3895812
+      objectReference: {fileID: 0}
+    - target: {fileID: 364002459690132344, guid: cef3592934241e247bf1163ba9616657, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.311398
+      objectReference: {fileID: 0}
+    - target: {fileID: 364002459690132344, guid: cef3592934241e247bf1163ba9616657, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 364002459690132344, guid: cef3592934241e247bf1163ba9616657, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 364002459690132344, guid: cef3592934241e247bf1163ba9616657, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 364002459690132344, guid: cef3592934241e247bf1163ba9616657, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 364002459690132344, guid: cef3592934241e247bf1163ba9616657, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 364002459690132344, guid: cef3592934241e247bf1163ba9616657, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 364002459690132344, guid: cef3592934241e247bf1163ba9616657, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 364002459690132349, guid: cef3592934241e247bf1163ba9616657, type: 3}
+      propertyPath: m_Name
+      value: PostProcessing
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cef3592934241e247bf1163ba9616657, type: 3}
 --- !u!1 &791148408 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8129091701071665238, guid: a151ebc01a7a3e046a5a04d87e39b8cf, type: 3}
@@ -1309,6 +1366,7 @@ GameObject:
   - component: {fileID: 1468031217}
   - component: {fileID: 1468031216}
   - component: {fileID: 1468031219}
+  - component: {fileID: 1468031220}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1397,6 +1455,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FollowTarget: {fileID: 791148408}
+--- !u!114 &1468031220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468031215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 1468031218}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!198 &1473176406 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8420868372060521240, guid: d6c4be2d7ef4c7344ac23891f5a5eac0, type: 3}
