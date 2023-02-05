@@ -12,7 +12,7 @@ namespace GameManagers
         public int score;
         [SerializeField]
         private TMP_Text scoreText;
-
+        
         
         public static GameMan Instance;
         [SerializeField]
@@ -22,6 +22,8 @@ namespace GameManagers
         [SerializeField]
         private GameObject HighscoreSystem;
 
+        [SerializeField] public TMP_Text fartText;
+        
         [Header("TEST MODE")]
         [SerializeField]
         public bool Testing;

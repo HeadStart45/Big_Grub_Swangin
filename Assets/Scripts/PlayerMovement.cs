@@ -21,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     //Components
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Animator an;
+    [SerializeField] private ParticleSystem FartParticles;
+    [SerializeField] private ParticleSystem JizzParticles;
+    [SerializeField] private ParticleSystem WaterParticles;
 
     private bool FirstJump = true;
 
@@ -137,6 +140,7 @@ public class PlayerMovement : MonoBehaviour
         tempJoint.connectedBody = TouchedVine.GetComponent<Rigidbody>();
         tempJoint.connectedMassScale = 3;
         GrabbedVine = TouchedVine;
+        JizzParticles.Play();
         
         rb.AddForce(GrabDirection * GrabVinePower, ForceMode.Impulse);
     }
@@ -149,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
         TouchedVine = null;
 
         rb.AddForce(ReleaseDirection * ReleaseVinePower, ForceMode.Impulse);
+        FindObjectOfType<AudioManager>().Play("Jump");
     }
 
     private void Fart()
@@ -156,8 +161,7 @@ public class PlayerMovement : MonoBehaviour
         if (FartsPossible > 0)
         {
             FartsPossible--;
-            rb.AddForce(JumpDirection*FartPower, ForceMode.Impulse);
-            an.SetTrigger("Fart");
+            StartCoroutine(FartSpeedActivate());
             Debug.Log("Fart");
         }
         
@@ -209,6 +213,17 @@ public class PlayerMovement : MonoBehaviour
         coll.enabled = false;
         yield return new WaitForSeconds(1.0f);
         coll.enabled = true;
+    }
+
+    IEnumerator FartSpeedActivate()
+    {
+        an.SetTrigger("Fart");
+        transform.rotation = Quaternion.Euler(0, 180, 0);
+        
+        yield return new WaitForSeconds(0.5f);
+        rb.AddForce(JumpDirection*FartPower, ForceMode.Impulse);
+        FartParticles.Play();
+        GameMan.Instance.fartText.text = FartsPossible.ToString();
     }
 
 }
