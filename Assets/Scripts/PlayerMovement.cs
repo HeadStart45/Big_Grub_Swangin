@@ -8,15 +8,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float ReleaseVinePower;
     [SerializeField] private float FartPower;
     [SerializeField] private float MushroomPower;
+    [SerializeField] private float GrabVinePower;
     [SerializeField] private float GrabSafeZone;
     [SerializeField] private Vector3 JumpDirection;
+    [SerializeField] private Vector3 ReleaseDirection;
 
+
+    private int FartsPossible = 3;
     private float initialX;
 
     //Components
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private Animator an;
 
-    private bool FirstJump = false;
+    private bool FirstJump = true;
 
     [SerializeField]
     private Vine TouchedVine;
@@ -65,19 +70,19 @@ public class PlayerMovement : MonoBehaviour
             // Early return to not test for keyboard input
             return;
         }
+        //Fart works on Alt only on keyboard, fart button on screen for mobile
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Fart();
+        }
+
 
         // GameMan.Instance.IncrementScore(-(transform.position.x - initialX));
 
         // Keyboard input
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!FirstJump)
-            {
-                Debug.Log("Jump");
-                rb.AddForce(JumpDirection * JumpPower, ForceMode.Impulse);
-                FirstJump = true;
-            }
-            else if (TouchedVine != null)
+            if (TouchedVine != null)
             {
                 GrabVine();
             }
@@ -130,8 +135,8 @@ public class PlayerMovement : MonoBehaviour
         tempJoint = gameObject.AddComponent<FixedJoint>();
         tempJoint.connectedBody = TouchedVine.GetComponent<Rigidbody>();
         GrabbedVine = TouchedVine;
-
-        //rb.AddForce(rb.velocity * ReleaseVinePower, ForceMode.Impulse);
+    
+        rb.AddForce(ReleaseDirection * GrabVinePower, ForceMode.Impulse);
     }
 
     private void ReleaseVine()
@@ -142,6 +147,18 @@ public class PlayerMovement : MonoBehaviour
         TouchedVine = null;
 
         rb.AddForce(JumpDirection * ReleaseVinePower, ForceMode.Impulse);
+    }
+
+    private void Fart()
+    {
+        if (FartsPossible > 0)
+        {
+            FartsPossible--;
+            rb.AddForce(JumpDirection*FartPower, ForceMode.Impulse);
+            an.SetTrigger("Fart");
+            Debug.Log("Fart");
+        }
+        
     }
 
     private void OnTriggerExit(Collider _collision)
@@ -164,24 +181,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (FirstJump )
+ 
+        if (collision.gameObject.CompareTag("Mushroom"))
         {
-            if (collision.gameObject.CompareTag("Mushroom"))
-            {
-                Debug.Log("Mushroom Blast");
-                rb.AddForce(JumpDirection * MushroomPower, ForceMode.Impulse);
-            }
-            else
-            {
-                if (!GameMan.Instance.Testing)
-                {
-                    GameMan.Instance.PlayerHasDied();
-                    Destroy(this.gameObject);
-                }
-
-            }
-            
+            Debug.Log("Mushroom Blast");
+            rb.AddForce(JumpDirection * MushroomPower, ForceMode.Impulse);
         }
+        else
+        {
+            if (!GameMan.Instance.Testing && collision.gameObject.CompareTag("Ground"))
+            {
+                GameMan.Instance.PlayerHasDied();
+                Destroy(this.gameObject);
+            }
+
+        }
+            
+
         
     }
 

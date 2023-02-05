@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 3602422615954798163}
   - component: {fileID: 3038459334253194799}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,11 +286,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4536218535134673564, guid: dca32f25dd421204b91588338f440492, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.9
+      value: 25.53
       objectReference: {fileID: 0}
     - target: {fileID: 4536218535134673564, guid: dca32f25dd421204b91588338f440492, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.29
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: 4536218535134673564, guid: dca32f25dd421204b91588338f440492, type: 3}
       propertyPath: m_LocalPosition.z
@@ -422,11 +422,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4536218535134673564, guid: dca32f25dd421204b91588338f440492, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.85
+      value: 37.480003
       objectReference: {fileID: 0}
     - target: {fileID: 4536218535134673564, guid: dca32f25dd421204b91588338f440492, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.29
+      value: 0.4899999
       objectReference: {fileID: 0}
     - target: {fileID: 4536218535134673564, guid: dca32f25dd421204b91588338f440492, type: 3}
       propertyPath: m_LocalPosition.z
