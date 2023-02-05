@@ -24,7 +24,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ParticleSystem FartParticles;
     [SerializeField] private ParticleSystem JizzParticles;
     [SerializeField] private ParticleSystem WaterParticles;
-
+    [SerializeField] private SoundRandomiser randomFart;
+    
+    
     private bool FirstJump = true;
 
     [SerializeField]
@@ -219,7 +221,7 @@ public class PlayerMovement : MonoBehaviour
     {
         an.SetTrigger("Fart");
         transform.rotation = Quaternion.Euler(0, 180, 0);
-        
+        randomFart.RandomiseFootstep();
         yield return new WaitForSeconds(0.5f);
         rb.AddForce(JumpDirection*FartPower, ForceMode.Impulse);
         FartParticles.Play();

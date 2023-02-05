@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12670855, g: 0.13326581, b: 0.11984316, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414754, b: 0.12107867, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -642,25 +642,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &302961395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302961391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1995ff29044e8334795deebccc7188fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - {fileID: 8300000, guid: d1b38bba7f26a2748bbd467df67fc91e, type: 3}
-  - {fileID: 8300000, guid: b694c1fe86487bd4e824c5de1b0fed7d, type: 3}
-  - {fileID: 8300000, guid: a4d7516a33d6d9148842cc0a193f4e7e, type: 3}
-  - {fileID: 8300000, guid: dcca2ea494410774594092d6e6f4f4d9, type: 3}
-  volumeChangeMultiplier: 0.367
-  pitchChangeMultiplier: 0.2
 --- !u!1001 &426364060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -794,6 +775,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8129091701071665229, guid: a151ebc01a7a3e046a5a04d87e39b8cf, type: 3}
   m_PrefabInstance: {fileID: 1327375239}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &791148415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791148408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1995ff29044e8334795deebccc7188fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - {fileID: 8300000, guid: d1b38bba7f26a2748bbd467df67fc91e, type: 3}
+  - {fileID: 8300000, guid: b694c1fe86487bd4e824c5de1b0fed7d, type: 3}
+  - {fileID: 8300000, guid: a4d7516a33d6d9148842cc0a193f4e7e, type: 3}
+  - {fileID: 8300000, guid: dcca2ea494410774594092d6e6f4f4d9, type: 3}
+  volumeChangeMultiplier: 0.367
+  pitchChangeMultiplier: 0.2
 --- !u!1001 &931182759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1232,6 +1232,10 @@ PrefabInstance:
       propertyPath: FartPower
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 8129091701071665231, guid: a151ebc01a7a3e046a5a04d87e39b8cf, type: 3}
+      propertyPath: randomFart
+      value: 
+      objectReference: {fileID: 791148415}
     - target: {fileID: 8129091701071665231, guid: a151ebc01a7a3e046a5a04d87e39b8cf, type: 3}
       propertyPath: FartParticles
       value: 

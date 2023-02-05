@@ -16,7 +16,7 @@ public class SoundRandomiser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        source = GetComponent<AudioSource>();
+        source = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class SoundRandomiser : MonoBehaviour
     public void RandomiseFootstep()
     {
         source.clip = sounds[Random.Range(0, sounds.Length)];
-        source.volume = Random.Range(0.3f - volumeChangeMultiplier, 0.3f);
+        source.volume = 1.0f;
         source.pitch = Random.Range(1 - pitchChangeMultiplier, 1 + pitchChangeMultiplier);
         source.PlayOneShot(source.clip);
     }
