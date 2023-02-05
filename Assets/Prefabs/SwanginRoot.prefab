@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4441837625701935}
   m_LocalRotation: {x: 0.0717942, y: 0.0030554808, z: -0.03559003, w: 0.9967796}
-  m_LocalPosition: {x: -0.014302098, y: -0.0008135254, z: -0.00095382205}
+  m_LocalPosition: {x: -0.01464, y: -0.00545, z: -0.00163}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -44,7 +44,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4441837625701935}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -67,7 +67,7 @@ HingeJoint:
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
   m_Spring:
-    spring: 0
+    spring: 2
     damper: 0
     targetPosition: 0
   m_UseMotor: 0
@@ -75,10 +75,10 @@ HingeJoint:
     targetVelocity: 0
     force: 0
     freeSpin: 0
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_Limits:
-    min: 0.66
-    max: 5.08
+    min: -130
+    max: 130
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -112,9 +112,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.002
-  m_Height: 0.019
+  m_Height: 0.013415048
   m_Direction: 0
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.008409795, y: -2.9854694e-10, z: -5.856151e-11}
 --- !u!1 &3870898948999667750
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +191,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4015709961617326208}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -214,7 +214,7 @@ HingeJoint:
   m_ConnectedAnchor: {x: -0.0091569275, y: -0.0000000017376323, z: -5.6132876e-11}
   m_UseSpring: 0
   m_Spring:
-    spring: 0
+    spring: 2
     damper: 0
     targetPosition: 0
   m_UseMotor: 0
@@ -222,10 +222,10 @@ HingeJoint:
     targetVelocity: 0
     force: 0
     freeSpin: 0
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_Limits:
-    min: 0.66
-    max: 5.08
+    min: -130
+    max: 130
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -259,9 +259,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.002
-  m_Height: 0.005
+  m_Height: 0.004062622
   m_Direction: 0
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.00046868934, y: -1.306734e-10, z: 1.837244e-12}
 --- !u!1 &4845204025174633054
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4845204025174633054}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.017550737, y: -3.0010716e-18, z: 4.699019e-16}
+  m_LocalPosition: {x: -0.0176, y: -0.0019, z: 4.699019e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -306,7 +306,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4845204025174633054}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -329,7 +329,7 @@ HingeJoint:
   m_ConnectedAnchor: {x: -0.017550737, y: 0, z: -5.2386895e-10}
   m_UseSpring: 0
   m_Spring:
-    spring: 0
+    spring: 2
     damper: 0
     targetPosition: 0
   m_UseMotor: 0
@@ -337,10 +337,10 @@ HingeJoint:
     targetVelocity: 0
     force: 0
     freeSpin: 0
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_Limits:
-    min: 0.66
-    max: 5.08
+    min: -130
+    max: 130
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -374,9 +374,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.002
-  m_Height: 0.02
+  m_Height: 0.011287112
   m_Direction: 0
-  m_Center: {x: 0.008, y: 0, z: 0}
+  m_Center: {x: 0.003643579, y: 4.891341e-13, z: 0}
 --- !u!1 &5101351258772311735
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,7 +513,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6453721496424394881}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -536,7 +536,7 @@ HingeJoint:
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
   m_Spring:
-    spring: 0
+    spring: 2
     damper: 0
     targetPosition: 0
   m_UseMotor: 0
@@ -544,10 +544,10 @@ HingeJoint:
     targetVelocity: 0
     force: 0
     freeSpin: 0
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_Limits:
-    min: 0.66
-    max: 5.08
+    min: -130
+    max: 130
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -580,10 +580,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.002
-  m_Height: 0.02
+  m_Radius: 0.0020421403
+  m_Height: 0.014325576
   m_Direction: 0
-  m_Center: {x: 0.005, y: 0, z: 0}
+  m_Center: {x: -0.005765194, y: -0.00004214019, z: 0}
 --- !u!1 &6940793987443628445
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +627,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6940793987443628445}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -650,7 +650,7 @@ HingeJoint:
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
   m_Spring:
-    spring: 0
+    spring: 2
     damper: 0
     targetPosition: 0
   m_UseMotor: 0
@@ -658,10 +658,10 @@ HingeJoint:
     targetVelocity: 0
     force: 0
     freeSpin: 0
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_Limits:
-    min: 0.66
-    max: 5.08
+    min: -95.59997
+    max: 98.11771
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -712,7 +712,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7528524826252939047}
   m_LocalRotation: {x: -0.00073702895, y: -0.0028905082, z: -0.013174214, w: 0.9999088}
-  m_LocalPosition: {x: -0.0118488325, y: -6.730727e-18, z: 7.806255e-20}
+  m_LocalPosition: {x: -0.01187, y: -0.00074, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -728,7 +728,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7528524826252939047}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -751,7 +751,7 @@ HingeJoint:
   m_ConnectedAnchor: {x: -0.01184883, y: 8.731149e-11, z: -0.0000000042491592}
   m_UseSpring: 0
   m_Spring:
-    spring: 0
+    spring: 2
     damper: 0
     targetPosition: 0
   m_UseMotor: 0
@@ -759,10 +759,10 @@ HingeJoint:
     targetVelocity: 0
     force: 0
     freeSpin: 0
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_Limits:
-    min: 0.66
-    max: 5.08
+    min: -130
+    max: 130
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -796,9 +796,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.002
-  m_Height: 0.015
+  m_Height: 0.0063385055
   m_Direction: 0
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.0043307547, y: -0.0000000012071103, z: 1.1714628e-11}
 --- !u!1 &7585506199861682683
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,7 +827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7585506199861682683}
   m_LocalRotation: {x: -0.07128256, y: -0.011276898, z: 0.057565734, w: 0.9957298}
-  m_LocalPosition: {x: -0.017030109, y: -3.6082247e-18, z: 2.081668e-18}
+  m_LocalPosition: {x: -0.01694, y: -0.00073, z: 0.0001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -843,7 +843,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7585506199861682683}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -866,7 +866,7 @@ HingeJoint:
   m_ConnectedAnchor: {x: -0.017030096, y: 4.8930815e-10, z: 5.0931703e-10}
   m_UseSpring: 0
   m_Spring:
-    spring: 0
+    spring: 2
     damper: 0
     targetPosition: 0
   m_UseMotor: 0
@@ -874,10 +874,10 @@ HingeJoint:
     targetVelocity: 0
     force: 0
     freeSpin: 0
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_Limits:
-    min: 0.66
-    max: 5.08
+    min: -130
+    max: 130
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -910,7 +910,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.002
-  m_Height: 0.012
+  m_Radius: 0.0014662476
+  m_Height: 0.013988619
   m_Direction: 0
-  m_Center: {x: 0.002, y: 0, z: 0}
+  m_Center: {x: -0.005490046, y: -3.1325145e-10, z: 0.00053375243}

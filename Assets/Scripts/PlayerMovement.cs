@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float GrabSafeZone;
     [SerializeField] private Vector3 JumpDirection;
     [SerializeField] private Vector3 ReleaseDirection;
+    [SerializeField] private Vector3 GrabDirection;
 
 
     private int FartsPossible = 3;
@@ -77,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        // GameMan.Instance.IncrementScore(-(transform.position.x - initialX));
+        GameMan.Instance.IncrementScore(-(transform.position.x - initialX));
 
         // Keyboard input
         if (Input.GetKeyDown(KeyCode.Space))
@@ -134,9 +135,10 @@ public class PlayerMovement : MonoBehaviour
     {
         tempJoint = gameObject.AddComponent<FixedJoint>();
         tempJoint.connectedBody = TouchedVine.GetComponent<Rigidbody>();
+        tempJoint.connectedMassScale = 3;
         GrabbedVine = TouchedVine;
-    
-        rb.AddForce(ReleaseDirection * GrabVinePower, ForceMode.Impulse);
+        
+        rb.AddForce(GrabDirection * GrabVinePower, ForceMode.Impulse);
     }
 
     private void ReleaseVine()
@@ -146,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
         GrabbedVine = null;
         TouchedVine = null;
 
-        rb.AddForce(JumpDirection * ReleaseVinePower, ForceMode.Impulse);
+        rb.AddForce(ReleaseDirection * ReleaseVinePower, ForceMode.Impulse);
     }
 
     private void Fart()

@@ -675,6 +675,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 8129091701071665228, guid: a151ebc01a7a3e046a5a04d87e39b8cf, type: 3}
+      propertyPath: m_Constraints
+      value: 56
+      objectReference: {fileID: 0}
     - target: {fileID: 8129091701071665229, guid: a151ebc01a7a3e046a5a04d87e39b8cf, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -736,6 +740,14 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8129091701071665231, guid: a151ebc01a7a3e046a5a04d87e39b8cf, type: 3}
+      propertyPath: GrabDirection.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129091701071665231, guid: a151ebc01a7a3e046a5a04d87e39b8cf, type: 3}
+      propertyPath: GrabDirection.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129091701071665231, guid: a151ebc01a7a3e046a5a04d87e39b8cf, type: 3}
       propertyPath: JumpDirection.x
       value: -0.5
       objectReference: {fileID: 0}
@@ -745,7 +757,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8129091701071665231, guid: a151ebc01a7a3e046a5a04d87e39b8cf, type: 3}
       propertyPath: ReleaseVinePower
-      value: 5
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129091701071665231, guid: a151ebc01a7a3e046a5a04d87e39b8cf, type: 3}
+      propertyPath: ReleaseDirection.x
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8129091701071665238, guid: a151ebc01a7a3e046a5a04d87e39b8cf, type: 3}
       propertyPath: m_Name
@@ -871,6 +887,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 786760278939580103, guid: 76af375024c4bc14f93d13d1c43d4474, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.18
+      objectReference: {fileID: 0}
     - target: {fileID: 4994720095874803302, guid: 76af375024c4bc14f93d13d1c43d4474, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -918,6 +938,10 @@ PrefabInstance:
     - target: {fileID: 4994720095874803303, guid: 76af375024c4bc14f93d13d1c43d4474, type: 3}
       propertyPath: m_Name
       value: FirstChunk
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038253024480822834, guid: 76af375024c4bc14f93d13d1c43d4474, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0235
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76af375024c4bc14f93d13d1c43d4474, type: 3}
