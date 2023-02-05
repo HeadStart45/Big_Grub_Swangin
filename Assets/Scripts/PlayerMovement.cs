@@ -22,10 +22,11 @@ public class PlayerMovement : MonoBehaviour
     private Vine TouchedVine;
     [SerializeField]
     private Vine GrabbedVine;
-
+    
+    //Joint Holding the character to vine
+    
     private FixedJoint tempJoint;
-
-    private Coroutine delayReleaseCoro;
+    
     // Start is called before the first frame update
     private void Start()
     {
