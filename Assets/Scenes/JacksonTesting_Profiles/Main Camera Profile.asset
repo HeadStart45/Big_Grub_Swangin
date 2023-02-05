@@ -62,7 +62,7 @@ MonoBehaviour:
     value: 1
   filtering:
     overrideState: 0
-    value: {x: 50, y: 95}
+    value: {x: 53.99999, y: 99}
   minLuminance:
     overrideState: 0
     value: 0
@@ -70,8 +70,8 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   keyValue:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 1.03
   eyeAdaptation:
     overrideState: 0
     value: 0

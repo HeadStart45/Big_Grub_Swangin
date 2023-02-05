@@ -66,6 +66,7 @@ namespace GameManagers
         {
             if (!Testing)
             {
+                FindObjectOfType<AudioManager>().Play("Splash");
                 DeathScreen.SetActive(true);
                 InGameUI.SetActive(false);
                 Instantiate(HighscoreSystem);
