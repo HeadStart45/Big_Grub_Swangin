@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 GrabDirection;
 
 
-    private int FartsPossible = 3;
+    private int FartsPossible = 5;
     private float initialX;
 
     //Components

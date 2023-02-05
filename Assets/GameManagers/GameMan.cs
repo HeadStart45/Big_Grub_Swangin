@@ -56,9 +56,9 @@ namespace GameManagers
                 {
                     score = (int)_distanceTravelled;
                 }
-                scoreText.text = score.ToString() + "m";
+                scoreText.text = score.ToString() + "cm";
             }
-
+            
             
         }
 
