@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using GameManagers;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,12 +13,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float FartPower;
     [SerializeField] private float MushroomPower;
     [SerializeField] private float GrabVinePower;
-    [SerializeField] private float GrabSafeZone;
+
     [SerializeField] private Vector3 JumpDirection;
     [SerializeField] private Vector3 ReleaseDirection;
     [SerializeField] private Vector3 GrabDirection;
 
-
+    private Rigidbody vineRb = null;
+    
+    
     private int FartsPossible = 5;
     private float initialX;
 
@@ -29,11 +35,11 @@ public class PlayerMovement : MonoBehaviour
     
     private bool FirstJump = true;
 
-    [SerializeField]
-    private Vine TouchedVine;
-    [SerializeField]
-    private Vine GrabbedVine;
+    private bool Grabbing = false;
+
+    private GameObject Focus;
     
+
     //Joint Holding the character to vine
     
     private FixedJoint tempJoint;
@@ -53,24 +59,12 @@ public class PlayerMovement : MonoBehaviour
             var touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
             {
-                if (!FirstJump)
-                {
-                    Debug.Log("Jump");
-                    rb.AddForce(JumpDirection * JumpPower, ForceMode.Impulse);
-                    FirstJump = true;
-                }
-                else if (TouchedVine != null)
-                {
-                    GrabVine();
-                }
+                //GrabVine();
             }
 
             if (touch.phase != TouchPhase.Ended) {
-                return;
-            }
-
-            if (GrabbedVine != null) {
                 ReleaseVine();
+                return;
             }
 
             // Early return to not test for keyboard input
@@ -86,24 +80,17 @@ public class PlayerMovement : MonoBehaviour
         GameMan.Instance.IncrementScore(-(transform.position.x - initialX));
 
         // Keyboard input
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (TouchedVine != null)
-            {
-                GrabVine();
-            }
+            GrabVine(); 
         }
-
+        
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            if (GrabbedVine != null)
-            {
-                ReleaseVine();
-            }
-
-
+            ReleaseVine(); 
         }
-
+        
         if (GameMan.Instance.Testing)
         {
             if (Input.GetKey(KeyCode.D))
@@ -111,51 +98,47 @@ public class PlayerMovement : MonoBehaviour
                 transform.position += new Vector3(-0.1f, 0f, 0f);
             }
         }
-
-
-
     }
 
-    private void FixedUpdate()
+    private void OnTriggerEnter(Collider other)
     {
-        /*
-        if (GrabbedVine == null)
+        if (IsVine(other))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, rb.velocity.normalized, out hit, GrabSafeZone))
-            {
-                if (hit.transform.gameObject.CompareTag("Vine") && GrabbedVine == null)
-                {
-                    Debug.Log("HitVine");
-                    TouchedVine = hit.transform.GetComponent<Vine>();
-                    //Debug.DrawRay(transform.position, rb.velocity.normalized * hit.distance, Color.green)
-                }
-            }
+            vineRb = other.GetComponent<Rigidbody>();
         }
-        */
-        //Debug.DrawRay(transform.position, rb.velocity.normalized, Color.yellow);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (IsVine(other))
+        {
+            vineRb = null;
+        }
     }
 
     private void GrabVine()
     {
-        tempJoint = gameObject.AddComponent<FixedJoint>();
-        tempJoint.connectedBody = TouchedVine.GetComponent<Rigidbody>();
-        tempJoint.connectedMassScale = 3;
-        GrabbedVine = TouchedVine;
-        JizzParticles.Play();
+        if (vineRb != null)
+        {
+            tempJoint = gameObject.AddComponent<FixedJoint>();
+            tempJoint.connectedBody = vineRb;
+            tempJoint.connectedMassScale = 5;
+
+            JizzParticles.Play();
         
-        rb.AddForce(GrabDirection * GrabVinePower, ForceMode.Impulse);
+            rb.AddForce(GrabDirection * GrabVinePower, ForceMode.Impulse);
+        }
     }
 
     private void ReleaseVine()
     {
-        Destroy(tempJoint);
-        Destroy(GrabbedVine.gameObject.GetComponent<BoxCollider>());
-        GrabbedVine = null;
-        TouchedVine = null;
-
-        rb.AddForce(ReleaseDirection * ReleaseVinePower, ForceMode.Impulse);
-        FindObjectOfType<AudioManager>().Play("Jump");
+        if (tempJoint != null)
+        {
+            Destroy(tempJoint);
+            rb.AddForce(ReleaseDirection * ReleaseVinePower, ForceMode.Impulse);
+            FindObjectOfType<AudioManager>().Play("Jump");
+            vineRb = null;
+        }
     }
 
     private void Fart()
@@ -168,24 +151,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
-
-    private void OnTriggerExit(Collider _collision)
-    {
-        if (_collision.gameObject == TouchedVine)
-        {
-            Debug.Log("EndContact");
-
-                TouchedVine = null;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Vine"))
-        {
-            TouchedVine = other.gameObject.GetComponent<Vine>();
-        }
-    }
+    
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -202,19 +168,10 @@ public class PlayerMovement : MonoBehaviour
                 GameMan.Instance.PlayerHasDied();
                 Destroy(this.gameObject);
             }
-
         }
             
 
         
-    }
-
-    IEnumerator DelayReTouch(Vine _vine)
-    {
-        BoxCollider coll = _vine.GetComponent<BoxCollider>();
-        coll.enabled = false;
-        yield return new WaitForSeconds(1.0f);
-        coll.enabled = true;
     }
 
     IEnumerator FartSpeedActivate()
@@ -227,5 +184,25 @@ public class PlayerMovement : MonoBehaviour
         FartParticles.Play();
         GameMan.Instance.fartText.text = FartsPossible.ToString();
     }
+    
+    bool IsVine(Collider other)
+    {
+        if (other.GetComponent<Vine>() != null)
+        {
+            Debug.Log("Is Vine");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        
+    }
 }
